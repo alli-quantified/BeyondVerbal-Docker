@@ -1,0 +1,29 @@
+#!/bin/bash
+
+sleep 5
+
+INPATH="/opt/input/"
+cd ${INPATH}
+
+for i in $( ls -l *.wav | awk '{print $9}' ); do
+    echo "working on file: " $i >> /var/log/as-beyondverbal.log
+
+    python2.7 /opt/beyondverbal/bvc.py $i > /opt/output/$i.json #>> /var/log/as-beyondverbal.log
+    sleep 5
+
+    # Remove u's from JSON.
+    sed -i -e "s/u'/'/g" /opt/output/$i.json
+
+    # If there are any double quotes, eliminate them.
+    sed -i -e "s/\"//g" /opt/output/$i.json
+
+    # Turn single into double quotes.
+    sed -i -e "s/'/\"/g" /opt/output/$i.json
+
+    cat /opt/output/$i.json | jq '.' >> /var/log/as-beyondverbal.log
+done
+
+# Refresh date and log end
+echo "AS BeyondVerbal run complete." >> /var/log/as-beyondverbal.log
+
+sleep 14400

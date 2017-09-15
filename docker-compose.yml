@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+  beyondverbal:
+    image: alliquantified/as-beyondverbal:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      BV_API_KEY: ''
+      BV_META_trwitterId: 'alli_quantified'
+      BV_META_deviceId: 'alli-testing-wks'
+      BV_META_email: 'none@none.com'
+    volumes:
+      - ./input:/opt/input:rw
+      - ./output:/opt/output:rw

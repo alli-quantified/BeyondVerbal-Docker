@@ -1,0 +1,7 @@
+#!/bin/bash
+#touch /var/log/as-beyondverbal.log
+#
+echo " " >> /var/log/as-beyondverbal.log
+sleep 3
+
+tail -F /var/log/as-beyondverbal.log
