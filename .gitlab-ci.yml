@@ -1,17 +1,26 @@
-# This file is a template, and might need editing before it works on your project.
-# Official docker image.
+# Nothing to see here. -as
+
 image: docker:latest
 
 services:
   - docker:dind
 
-before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+#before_script:
+#  - docker command here
 
 build-master:
   stage: build
   script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     - docker build --pull -t alliquantified/as-beyondverbal:latest .
     - docker push alliquantified/as-beyondverbal:latest
   only:
     - master
+
+build:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+  except:
+    - master
+
