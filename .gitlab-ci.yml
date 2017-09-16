@@ -12,7 +12,7 @@ build-master:
   stage: build
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker build --pull -t alliquantified/as-beyondverbal:latest .
+    - dockeur build --pull -t alliquantified/as-beyondverbal:latest .
     - docker push alliquantified/as-beyondverbal:latest
   only:
     - master
@@ -20,7 +20,7 @@ build-master:
 build:
   stage: build
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker build -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
   except:
     - master
 
