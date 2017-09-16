@@ -11,15 +11,7 @@ before_script:
 build-master:
   stage: build
   script:
-    - docker build -t alliquantified/as-beyondverbal:latest .
+    - docker build --pull -t alliquantified/as-beyondverbal:latest .
+    - docker push alliquantified/as-beyondverbal:latest
   only:
     - master
-
-#build:
-#  stage: build
-#  script:
-#    - docker build -t alliquantified/as-beyondverbal:latest .
-#    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-#    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
-#  except:
-#    - master
