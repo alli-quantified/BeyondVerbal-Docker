@@ -8,13 +8,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("file", help="File to analyze. Include path. ex: testfile.wav",type=str)
 args = parser.parse_args()
 
-# Not looking to re-invent the wheel here on the first go-around. If we can
-# even get this off the ground, I'll be tickled. We can always refactor
-# or change languages later on. Remember, the end game is streaming in near-realtime,
-# not daily runs. For now, we'll settle for batch processing to make sure things work.
-#
-#    Onward! -as
-
 WAV_File = args.file
 
 def getAnalysis(API_Key,WavPath,META_deviceId,META_trwitterId,META_email):
